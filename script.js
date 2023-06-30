@@ -111,7 +111,7 @@ function removeLastCharacter() {
   display.value = display.value.slice(0, -1);
 }
 
-// Basic math operations
+// Math functions
 function add(a, b) {
   return a + b;
 }
@@ -126,43 +126,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if (b === 0) {
-    display.value = 'Error: Cannot divide by zero';
-    return;
+    return 'Error: Division by zero';
   }
   return a / b;
 }
-
-// Add event listener for keyboard events
-document.addEventListener('keydown', (event) => {
-  const key = event.key;
-  
-  if (/^\d$/.test(key)) {
-    appendNumber(key);
-  }
-  
-  if (['+', '-', '*', '/'].includes(key)) {
-    setOperator(key);
-  }
-  
-  if (key === '=' || key === 'Enter') {
-    calculate();
-  }
-  
-  if (key === 'Escape') {
-    clearCalculator();
-  }
-  
-  if (key === '.') {
-    appendNumber(key);
-  }
-  
-  if (key === 'Backspace') {
-    removeLastCharacter();
-  }
-});
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === '/') {
-    event.preventDefault();
-  }
-});
