@@ -6,21 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Basic Calculator">
   <meta name="author" content="Jason Haselden">
-  <title>Awesome Calculator</title>
+  <title>Online Calculator</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1 class="title">Awesome Calculator</h1>
-  <p class="description">Enter numbers and operators using the on-screen buttons or your keyboard. Press Enter to calculate the result.</p>
-
+  <div>
+    <h1 class="title">Online Calculator</h1>
+    <p class="description">Enter numbers and operators using the on-screen buttons or your keyboard. Press Enter to calculate the result.</p>
+</div>
   <div id="calculator">
+    <div id="calculation-display"></div>
     <input type="text" id="display" disabled>
     <div id="buttons">
       <button class="operator">+</button>
       <button class="operator">-</button>
       <button class="operator">*</button>
       <button class="operator">/</button>
-      <button class="number">0</button>
       <button class="number">1</button>
       <button class="number">2</button>
       <button class="number">3</button>
@@ -30,10 +31,14 @@
       <button class="number">7</button>
       <button class="number">8</button>
       <button class="number">9</button>
+      <button class="number">0</button>
       <button id="equals">=</button>
       <button id="clear">Clear</button>
       <button id="backspace">Backspace</button>
     </div>
+  </div>
+  <div class="footer">
+    <p>Created by JHaseldenDev 2023</p>
   </div>
   
   <script src="script.js"></script>

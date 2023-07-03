@@ -1,5 +1,6 @@
-// Get the display element
+// Get the display elements
 const display = document.getElementById('display');
+const calculationDisplay = document.getElementById('calculation-display');
 
 // Variables to store calculator values
 let firstNumber = '';
@@ -46,6 +47,7 @@ function appendNumber(number) {
     return;
   }
   display.value += number;
+  updateCalculationDisplay(display.value);
 }
 
 // Function to set the operator
@@ -56,6 +58,7 @@ function setOperator(selectedOperator) {
   firstNumber = display.value;
   operator = selectedOperator;
   display.value = '';
+  updateCalculationDisplay(`${firstNumber} ${operator}`);
 }
 
 // Function to perform the calculation
@@ -63,12 +66,12 @@ function calculate() {
   if (!firstNumber || !operator || !display.value) {
     return;
   }
-  
+
   const num1 = parseFloat(firstNumber);
   const num2 = parseFloat(display.value);
-  
+
   let result;
-  
+
   switch (operator) {
     case '+':
       result = add(num1, num2);
@@ -85,9 +88,10 @@ function calculate() {
     default:
       return;
   }
-  
+
   display.value = roundResult(result);
-  
+  updateCalculationDisplay(''); // Clear calculation display
+
   firstNumber = display.value;
   operator = '';
   secondNumber = '';
@@ -104,11 +108,18 @@ function clearCalculator() {
   firstNumber = '';
   operator = '';
   secondNumber = '';
+  updateCalculationDisplay('');
 }
 
 // Function to remove the last character from the display
 function removeLastCharacter() {
   display.value = display.value.slice(0, -1);
+  updateCalculationDisplay('');
+}
+
+// Function to update the calculation display
+function updateCalculationDisplay(text) {
+  calculationDisplay.innerText = text;
 }
 
 // Math functions
@@ -130,3 +141,20 @@ function divide(a, b) {
   }
   return a / b;
 }
+
+// Add event listener to keyboard input
+document.addEventListener('keydown', event => {
+  const key = event.key;
+  if (!isNaN(key) || key === '.') {
+    appendNumber(key);
+  } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+    setOperator(key);
+  } else if (key === 'Enter' || key === '=') {
+    event.preventDefault(); // Prevent the default Enter key behavior
+    calculate();
+  } else if (key === 'Backspace') {
+    removeLastCharacter();
+  } else if (key === 'Escape') {
+    clearCalculator();
+  }
+});
